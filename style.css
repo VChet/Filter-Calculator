@@ -1,0 +1,52 @@
+html,
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #474747;
+  font: 14px Tahoma, Helvetica, Arial, Sans-Serif;
+  font-weight: bold;
+}
+body {
+  background: linear-gradient(to bottom, rgba(216,224,222,1) 0%,rgba(174,191,188,1) 22%,rgba(153,175,171,1) 33%,rgba(142,166,162,1) 50%,rgba(130,157,152,1) 67%,rgba(78,92,90,1) 82%,rgba(14,14,14,1) 100%) no-repeat center center fixed;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+.container {
+  max-width: 50%;
+  margin: 50px 20px 0;
+}
+h5,
+p {
+  text-align: center;
+}
+samp {
+  font-size: 0.8em;
+}
+.basketImage {
+  max-width: 100px;
+  max-height: 100px;
+}
+.result .colorMatrixString,
+.result .filterString {
+  text-align: left!important;
+  color: #474747!important;
+}
+.calculatedTargetSvg {
+  -webkit-filter: url(#colorize);
+          filter: url(#colorize);
+}
+.btn-group button {
+  background-color: rgba(130,157,152,1);
+  padding: 8px 20px;
+}
+.btn-group button:hover {
+  background-color: rgba(153,175,171,1);
+}
+.btn-secondary.focus, .btn-secondary:focus {
+  box-shadow: none;
+}
