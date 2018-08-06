@@ -16,16 +16,16 @@ body {
        -o-background-size: cover;
           background-size: cover;
 }
-.container {
-  max-width: 50%;
-  margin: 50px 20px 0;
-}
 h5,
 p {
   text-align: center;
 }
 samp {
   font-size: 0.8em;
+}
+.container {
+  max-width: 50%;
+  margin: 50px 20px 0;
 }
 .basketImage {
   max-width: 100px;
@@ -40,13 +40,13 @@ samp {
   -webkit-filter: url(#colorize);
           filter: url(#colorize);
 }
-.btn-group button {
-  background-color: rgba(130,157,152,1);
+.nav-pills > li > a:hover {
+  color: rgb(24, 29, 28);
+}
+.nav-pills .nav-link.active {
+  background-color: rgb(130,157,152);
   padding: 8px 20px;
 }
-.btn-group button:hover {
-  background-color: rgba(153,175,171,1);
-}
-.btn-secondary.focus, .btn-secondary:focus {
-  box-shadow: none;
+.nav-pills .nav-link {
+  color: rgb(76, 92, 89);
 }
