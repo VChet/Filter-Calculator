@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let result = [];
         result.push(
             target[0] - initial[0],
-            100 + (initial[1] - target[1]),
+            100 + (target[1] - initial[1]),
             100 + (target[2] - initial[2])
         );
         return result.map((a) => a.toFixed(1));
