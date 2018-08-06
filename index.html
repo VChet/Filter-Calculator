@@ -62,14 +62,14 @@
 					</div> -->
 					<div class="col-6">
 						<h5>Target using filter</h5>
-						<img src="http://richard.parnaby-king.co.uk/basket.svg" class="calculatedTarget basketImage mx-auto d-block"></img>
+						<img src="http://richard.parnaby-king.co.uk/basket.svg" class="calculatedTarget basketImage mx-auto d-block">
 						<div class="filterString alert alert-dark">
 							<samp></samp>
 						</div>
 					</div>
 					<div class="col-6">
 						<h5>Target using Color Matrix</h5>
-						<img src="http://richard.parnaby-king.co.uk/basket.svg" class="calculatedTargetSvg basketImage mx-auto d-block"></img>
+						<img src="http://richard.parnaby-king.co.uk/basket.svg" class="calculatedTargetSvg basketImage mx-auto d-block">
 						<div class="colorMatrixString alert alert-dark">
 							<samp></samp>
 						</div>
@@ -145,7 +145,7 @@
 
 					<p>These two first steps are static and it's result will be reused every time we need to find a target adjustment.
 
-					<p>Now we need to calculate what we need to apply to this base color to get target color. First convert target color to HSL</p>
+					<p>Now we need to calculate what we need to apply to this base color to get target color. First convert target color to HSL.</p>
 
 					<p>Then we have to calculate the difference between those. Hue is calculated by simply subtracting base from target. The same for Saturation and Lightness, but as we assume 100% of the base value we need to subtract the result from 100% to end up with a diff for the accumulated values:</p>
 
@@ -167,14 +167,14 @@
 						<samp>
 							 /*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp------ base color ------&nbsp&nbsp-------- new target -------------------------------*/<br>
 							 filter: brightness(50%) sepia(1) hue-rotate(132deg)
-							saturate(103.2%) brightness(91.2%);
+							saturate(96.8%) brightness(91.2%);
 						</samp>
 					</div>
 
 					<p>Filters are expensive performance wise, especially if many are chained as here and they are in addition a dominant part of a page. They are neither supported in all browsers.</p>
 
 					<p class="h4">SVG Color Matrix</p>
-					<p></p>Another way is to do a CSS filter that references an SVG filter. The feColorMatrix primitive in SVG filters allows you to pick a color directly - like so. Take your color - divide each color's hex value by #FF and put them in the fifth column, first three rows of your color matrix.</p>
+					<p>Another way is to do a CSS filter that references an SVG filter. The feColorMatrix primitive in SVG filters allows to pick a color directly. Take your color - divide each color's hex value by #FF and put them in the fifth column, first three rows of your color matrix.</p>
 
 					<p class="h3">Contribute</p>
 					<p>Anyone and everyone is welcome to <a href="https://github.com/VChet/filter-calculator" target="_blank">contribute</a> and <a href="https://github.com/VChet/filter-calculator/issues" target="_blank">report</a> any issues.</p>
