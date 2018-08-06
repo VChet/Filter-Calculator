@@ -27,7 +27,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">#</div>
 							</div>
-							<input type="text" class="inputInitial form-control" placeholder="Color of your image" maxlength=6>
+							<input type="text" class="inputInitial form-control" placeholder="Initial color" maxlength=6>
 						</div>
 				<!-- 	<input class="selectorInitial" type="color"> -->
 						<div class="initialColor alert">
@@ -87,7 +87,95 @@
 					</div>
 				</div>
 			</div>
-			<div id="about" class="tab-pane"></div>
+			<div id="about" class="tab-pane card">
+				<div class="card-body">
+					This tool is based on answers given for the question
+					<blockquote class="blockquote">
+						<a href="https://stackoverflow.com/questions/29037023/how-to-calculate-required-hue-rotate-to-generate-specific-colour" target="_blank">
+							How to calculate required hue-rotate to generate specific colour?
+						</a>
+					</blockquote>
+
+					<p class="h3">How to use it?</p>
+					Enter the Hex color code of your image in the field.
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">#</div>
+						</div>
+						<input type="text" class="form-control" placeholder="Initial color" disabled>
+					</div>
+					And the color in which the image needs
+					to be repainted.
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">#</div>
+						</div>
+						<input type="text" class=" form-control" placeholder="Target color" disabled>
+					</div>
+					Use code on the left, if you want to change the color of the image using only css (color may be <a href="https://stackoverflow.com/questions/19187905/why-doesnt-hue-rotation-by-180deg-and-180deg-yield-the-original-color/19325417#19325417" target="_blank">significantly different</a> from the desired result)...
+					<div class="filterString alert alert-dark">
+						<samp>
+							-webkit-filter: brightness(50%) sepia(1) hue-rotate(229.4deg) saturate(101.6%) brightness(101.6%);<br>
+							filter: brightness(50%) sepia(1) hue-rotate(229.4deg) saturate(101.6%) brightness(101.6%)
+						</samp>
+					</div>
+					...or code on the right, to change the color via html and css  (you will need javascript if you can't change html).
+					<div class="colorMatrixString alert alert-dark">
+						<samp>&lt;svg&gt;
+							<br> &lt;defs&gt;
+							<br> &lt;filter id="colorize" color-interpolation-filters="sRGB"&gt;
+							<br> &lt;feColorMatrix type="matrix" values="0 0 0 0 0.742188 0 0 0 0 0.621094 0 0 0 0 0.878906 0 0 0 1 0"&gt;&lt;/feColorMatrix&gt;
+							<br> &lt;/filter&gt;
+							<br> &lt;/defs&gt;
+							<br> &lt;/svg&gt;</samp>
+					</div>
+
+					<p class="h3">How it works?</p>
+					<p class="h4">CSS Filter</p>
+					<p>The key is to define an initial color. White nor black or any gray-scale is technically an actual color - we
+					can't saturate or rotate it. We'll have to "colorize" it somehow, and the sepia filter is the only filter which do some form of colorizing.</p>
+
+					<p>The first step is to convert and define an intermediate color so we can saturate and rotate it later on. First we darken the white image and apply sepia to get a "base" color we can work with:</p>
+
+					<div class="alert alert-dark">
+						<samp>filter: brightness(50%) sepia(1);</samp>
+					</div>
+
+					<p>Step two is to <a href="https://stackoverflow.com/questions/2348597/why-doesnt-this-javascript-rgb-to-hsl-code-work/2348659#2348659">convert that to HSL color-space</a>.</p>
+						
+					<p>These two first steps are static and it's result will be reused every time we need to find a target adjustment.
+
+					<p>Now we need to calculate what we need to apply to this base color to get target color. First convert target color to HSL</p>
+					
+					<p>Then we have to calculate the difference between those. Hue is calculated by simply subtracting base from target. The same for Saturation and Lightness, but as we assume 100% of the base value we need to subtract the result from 100% to end up with a diff for the accumulated values:</p>
+					
+					<div class="alert alert-dark">
+						<samp>
+							H: 170 - 38 -> 132°<br>
+							S: 100 + (24.5 - 21.3) -> 103.2% (relative to base 100% = 3.2%)<br>
+							L: 100 + (51.2 - 60.0) -> 91.2% (relative to base 100% = -8.8%)
+						</samp>
+					</div>
+
+					Convert those values to a filter-string by appending it to the existing filter, then set it on the div:
+
+					<div class="alert alert-dark">
+						<samp>
+							 /*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp------ base color ------&nbsp&nbsp-------- new target -------------------------------*/<br>
+							 filter: brightness(50%) sepia(1) hue-rotate(132deg)
+							saturate(103.2%) brightness(91.2%);
+						</samp>
+					</div>
+
+					<p>Filters are expensive performance wise, especially if many are chained as here and they are in addition a dominant part of a page. They are neither supported in all browsers.</p>
+
+					<p class="h4">SVG Color Matrix</p>
+					<p></p>Another way is to do a CSS filter that references an SVG filter. The feColorMatrix primitive in SVG filters allows you to pick a color directly - like so. Take your color - divide each color's hex value by #FF and put them in the fifth column, first three rows of your color matrix.</p>
+
+					<p class="h3">Contribute</p>
+					<p>Anyone and everyone is welcome to <a href="https://github.com/VChet/filter-calculator">contribute</a> and <a href="https://github.com/VChet/filter-calculator/issues">report</a> any issues.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

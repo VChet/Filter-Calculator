@@ -16,16 +16,16 @@ body {
        -o-background-size: cover;
           background-size: cover;
 }
-h5,
-p {
+.alert p,
+h5 {
   text-align: center;
 }
 samp {
   font-size: 0.8em;
 }
 .container {
-  max-width: 50%;
-  margin: 50px 20px 0;
+  max-width: 65%;
+  margin: 50px 20px;
 }
 .basketImage {
   max-width: 100px;
@@ -49,4 +49,7 @@ samp {
 }
 .nav-pills .nav-link {
   color: rgb(76, 92, 89);
+}
+.card {
+  font-weight: 400;
 }
