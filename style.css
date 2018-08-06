@@ -1,8 +1,14 @@
 html,
 body {
   margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   color: #474747;
@@ -10,11 +16,9 @@ body {
   font-weight: bold;
 }
 body {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(216,224,222,1)),color-stop(22%, rgba(174,191,188,1)),color-stop(33%, rgba(153,175,171,1)),color-stop(50%, rgba(142,166,162,1)),color-stop(67%, rgba(130,157,152,1)),color-stop(82%, rgba(78,92,90,1)),to(rgba(14,14,14,1))) no-repeat center center fixed;
   background: linear-gradient(to bottom, rgba(216,224,222,1) 0%,rgba(174,191,188,1) 22%,rgba(153,175,171,1) 33%,rgba(142,166,162,1) 50%,rgba(130,157,152,1) 67%,rgba(78,92,90,1) 82%,rgba(14,14,14,1) 100%) no-repeat center center fixed;
-  -webkit-background-size: cover;
-     -moz-background-size: cover;
-       -o-background-size: cover;
-          background-size: cover;
+  background-size: cover;
 }
 .alert p,
 h5 {
