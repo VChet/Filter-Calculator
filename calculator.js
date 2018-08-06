@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     console.assert(hexToRgb("B9B384").toString() == [185, 179, 132].toString(), "hexToRgb Failed");
 
-    function rgbToHsv(r, g, b) {
+    function rgbToHsl(r, g, b) {
         r /= 255, g /= 255, b /= 255;
 
         const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return [(h * 360), (s * 100), (v * 100)];
     }
-    console.assert(rgbToHsv(185, 179, 132).map((a) => Math.floor(a)).toString() == ["53", "28", "72"].toString(), "rgbToHsv Failed");
+    console.assert(rgbToHsl(185, 179, 132).map((a) => Math.floor(a)).toString() == ["53", "28", "72"].toString(), "rgbToHsl Failed");
 
     function sepiaEffect(r, g, b) {
         let result = [];
@@ -93,29 +93,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const initialRGB = hexToRgb(inputInitial.value);
         initialData[1].innerText = `RGB ${initialRGB}`;
         if (initialRGB == false) { return; }
-        initialData[2].innerText = `HSV ${rgbToHsv.apply(null, initialRGB).map((a) => Math.floor(a))}`;
+        initialData[2].innerText = `HSL ${rgbToHsl.apply(null, initialRGB).map((a) => Math.floor(a))}`;
 
         // ==Target==
         targetColor.style.backgroundColor = `#${inputTarget.value}`;
         targetData[0].innerText = `HEX ${inputTarget.value}`;
         targetData[1].innerText = `RGB ${hexToRgb(inputTarget.value)}`;
-        let targetHSV = false;
+        let targetHSL = false;
         if (hexToRgb(inputTarget.value) == false) { return; }
-        targetHSV = rgbToHsv.apply(null, hexToRgb(inputTarget.value)).map((a) => Math.floor(a));
-        targetData[2].innerText = `HSV ${targetHSV}`;
+        targetHSL = rgbToHsl.apply(null, hexToRgb(inputTarget.value)).map((a) => Math.floor(a));
+        targetData[2].innerText = `HSL ${targetHSL}`;
 
         // ==Sepia Only==
         let sepiaRGB = sepiaEffect.apply(null, initialRGB);
-        let sepiaHSV = rgbToHsv.apply(null, sepiaRGB);
+        let sepiaHSL = rgbToHsl.apply(null, sepiaRGB);
 
         // ==Sepia and Brightness==
-        sepiaHSV[2] *= 0.5;
-        /* initialSepia.style.backgroundColor = `hsl(${sepiaHSV[0]},${sepiaHSV[1]}%,${sepiaHSV[2]}%)`; */
-        /* sepiaData[2].innerText = `HSV ${sepiaHSV.map((a) => Math.floor(a))}`; */
+        sepiaHSL[2] *= 0.5;
+        /* initialSepia.style.backgroundColor = `hsl(${sepiaHSL[0]},${sepiaHSL[1]}%,${sepiaHSL[2]}%)`; */
+        /* sepiaData[2].innerText = `HSL ${sepiaHSL.map((a) => Math.floor(a))}`; */
 
         // ==Result with filters==
-        if (targetHSV == false) { return; }
-        const diff = targetHSV && findDiff(sepiaHSV, targetHSV);
+        if (targetHSL == false) { return; }
+        const diff = targetHSL && findDiff(sepiaHSL, targetHSL);
         const cssLine = `brightness(50%) sepia(1) hue-rotate(${diff[0]}deg) saturate(${diff[1]}%) brightness(${diff[1]}%)`;
         filterString.innerText = `-webkit-filter: ${cssLine};\r\nfilter: ${cssLine}`
         calculatedTarget.style.filter = `${cssLine}`;
