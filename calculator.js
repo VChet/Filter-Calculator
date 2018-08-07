@@ -89,7 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (this.getAttribute("type") === "color") {
             this.parentNode.nextElementSibling.value = this.value.substring(1);
         } else if (this.getAttribute("type") === "text") {
-            if (this.value.length == 6) {
+            if (this.value.length === 2) {
+                this.previousElementSibling.firstElementChild.value = `#${this.value}${this.value}${this.value}`;
+            } else if (this.value.length === 3) {
+                this.previousElementSibling.firstElementChild.value = `#${this.value[0]}${this.value[0]}${this.value[1]}${this.value[1]}${this.value[2]}${this.value[2]}`;
+            } else if (this.value.length === 6) {
                 this.previousElementSibling.firstElementChild.value = `#${this.value}`;
             }
         }
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         inputTarget.value = inputTarget.value.toUpperCase();
 
         // ==Initial==
-        initialColor.style.backgroundColor = `#${inputInitial.value}`;
+        initialColor.style.backgroundColor = `${selectorInitial.value}`;
         initialData[0].innerText = `HEX ${inputInitial.value}`;
         const initialRGB = hexToRgb(inputInitial.value);
         initialData[1].innerText = `RGB ${initialRGB}`;
@@ -106,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
         initialData[2].innerText = `HSL ${rgbToHsl.apply(null, initialRGB).map((a) => Math.floor(a))}`;
 
         // ==Target==
-        targetColor.style.backgroundColor = `#${inputTarget.value}`;
+        targetColor.style.backgroundColor = `${selectorTarget.value}`;
         targetData[0].innerText = `HEX ${inputTarget.value}`;
         targetData[1].innerText = `RGB ${hexToRgb(inputTarget.value)}`;
         let targetHSL = false;
