@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 this.previousElementSibling.firstElementChild.value = `#${this.value[0]}${this.value[0]}${this.value[1]}${this.value[1]}${this.value[2]}${this.value[2]}`;
             } else if (this.value.length === 6) {
                 this.previousElementSibling.firstElementChild.value = `#${this.value}`;
+            } else if (this.value.length === 7) {
+                this.value = this.value.substring(1);
             }
         }
 
