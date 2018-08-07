@@ -62,3 +62,7 @@ samp {
   mix-blend-mode: difference;
   font-family: Arial, Helvetica, sans-serif;
 }
+.form-control[type*="color"] {
+  width: 44px;
+  padding: 0;
+}

@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const inputInitial = document.querySelector(".inputInitial");
-    /* 	const selectorInitial = document.querySelector(".selectorInitial"); */
+    const selectorInitial = document.querySelector(".selectorInitial");
     const inputTarget = document.querySelector(".inputTarget");
-    /* 	const selectorTarget = document.querySelector(".selectorTarget"); */
+    const selectorTarget = document.querySelector(".selectorTarget");
 
     const initialColor = document.querySelector(".initialColor");
     const initialData = initialColor.querySelectorAll("p");
@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const colorMatrix = document.querySelector("feColorMatrix");
 
     inputInitial.addEventListener("input", calculate);
+    selectorInitial.addEventListener("input", calculate);
     inputTarget.addEventListener("input", calculate);
+    selectorTarget.addEventListener("input", calculate);
 
     function hexToRgb(hex) {
         if ((hex.length < 2) || (hex.length > 6)) { return false; }
@@ -84,6 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function calculate() {
+        if (this.getAttribute("type") === "color") {
+            this.parentNode.nextElementSibling.value = this.value.substring(1);
+        } else if (this.getAttribute("type") === "text") {
+            if (this.value.length == 6) {
+                this.previousElementSibling.firstElementChild.value = `#${this.value}`;
+            }
+        }
+
         inputInitial.value = inputInitial.value.toUpperCase();
         inputTarget.value = inputTarget.value.toUpperCase();
 
