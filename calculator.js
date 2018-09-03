@@ -87,16 +87,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function calculate() {
         if (this.getAttribute("type") === "color") {
-            this.parentNode.nextElementSibling.value = this.value.substring(1);
+            const textInput = this.parentNode.nextElementSibling;
+            textInput.value = this.value.substring(1);
         } else if (this.getAttribute("type") === "text") {
+            const colorInput = this.previousElementSibling.firstElementChild;
             if (this.value.length === 2) {
-                this.previousElementSibling.firstElementChild.value = `#${this.value}${this.value}${this.value}`;
+                colorInput.value = `#${this.value}${this.value}${this.value}`;
             } else if (this.value.length === 3) {
-                this.previousElementSibling.firstElementChild.value = `#${this.value[0]}${this.value[0]}${this.value[1]}${this.value[1]}${this.value[2]}${this.value[2]}`;
+                colorInput.value = `#${this.value[0]}${this.value[0]}${this.value[1]}${this.value[1]}${this.value[2]}${this.value[2]}`;
             } else if (this.value.length === 6) {
-                this.previousElementSibling.firstElementChild.value = `#${this.value}`;
+                colorInput.value = `#${this.value}`;
             } else if (this.value.length === 7) {
                 this.value = this.value.substring(1);
+                colorInput.value = `#${this.value}`;
             }
         }
 
